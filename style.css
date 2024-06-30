@@ -325,5 +325,30 @@ span{
 }
 
 
+@media(max-width:1000px){
+    .home{
+        gap: 2rem;
+    }
+    @media(max-width:955px){
+    .home{
+        flex-direction: column;
+        margin: 0rem 2rem;
+        font-size: 2.5rem;
+    }
+    .home .home-content h3{
+        font-size: 2.5rem;
+    }
+    .home .home-content h1{
+        font-size: 5rem;
+    }
+    .home .home-img img{
+        width: 70vw;
+        margin-top: 4rem;
+
+    }
+}
+}
+
+
 
 
