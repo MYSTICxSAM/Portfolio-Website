@@ -7,13 +7,15 @@
     outline: none;
     scroll-behavior: smooth;
     font-family: sans-serif;
+    cursor: url("sam.png"),auto;
 }
+
 
 :root{
     --bg-color: #000000;
     --second-bg-color: #121212;
     --text-color: #fff;
-    --main-color: #04ecfd;
+    --main-color: #06cef1;
 }
 
 html{
@@ -43,7 +45,7 @@ html::-webkit-scrollbar-thumb{
     top: 0;
     left: 0;
     width: 100%;
-    padding: 3rem 9%;
+    padding: 1rem 9%;
     background: rgba(0,0,0,0.7);
     filter:drop-shadow(10px);
     display: flex;
@@ -55,7 +57,6 @@ html::-webkit-scrollbar-thumb{
     font-size: 3rem;
     color: var(--main-color);
     font-weight: 800;
-    cursor: pointer;
     transition: 0.5s ease;
 }
 .logo:hover{
@@ -67,7 +68,7 @@ html::-webkit-scrollbar-thumb{
 .navbar a{
     font-size:1.8rem;
     color: var(--text-color);
-    margin-left: 4rem;
+    margin-left: 5rem;
     font-weight: 500;
     transition:0.3s ease;
     border-bottom: 3px solid transparent;
@@ -113,6 +114,9 @@ html::-webkit-scrollbar-thumb{
     border-radius: 0.5rem;
     border-bottom: 0.5rem;
     }
+    .home-img img{
+        border-radius: 2%
+    }
 }
 
 
@@ -137,7 +141,6 @@ section{
     box-shadow: 0 0 10px var(--main-color),
                 0 0 15px var(--main-color),
                 0 0 50px var(--main-color);
-    cursor: pointer ;
     transition: 1s ease;
 }
 
@@ -153,7 +156,7 @@ section{
 }
 
 .home .home-content h1{
-    font-size: 6rem;
+    font-size: 5rem;
     font-weight: 700;
     line-height: 1.3;
 }
@@ -206,7 +209,6 @@ span{
     color: var(--main-color);
     font-size: 1.5rem;
     font-weight: 600;
-    cursor: pointer;
     overflow: hidden;
     transition: border 300ms,color 300ms;
     user-select: none;
@@ -250,12 +252,12 @@ span{
 
 .button:hover::before{
     
-    transform: translateX(-1em);
+    transform: translateX(1em);
 }
 
 .button:hover:after{
     
-    transform: translateX(1em);
+    transform: translateX(-1em);
 }
 
 .button:active::before,
@@ -305,9 +307,9 @@ span{
     }
     41%,60%{
         content: 'Coder';
-    }
+    }   
     61%,80%{
-        content: 'Lerner';
+        content: 'Learner';
     }
     81%,100%{
         content: 'Student';
@@ -323,7 +325,6 @@ span{
         width: calc(100% + 8px);
     }
 }
-
 
 @media(max-width:1000px){
     .home{
@@ -351,4 +352,127 @@ span{
 
 
 
+/* Services */
 
+
+.services{
+    background-color: var(--second-bg-color);
+}
+.heading
+{
+    text-align: center;
+    font-size: 7rem;
+}
+
+.service-container{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    align-items: center;
+    gap: 2rem;
+}
+.services .single-service{
+    position: relative;
+    margin-top: 30px;
+    background-color: var(--bg-color);
+    border-radius: 10px;
+    padding: 40px 30px;
+    overflow: hidden;
+}
+
+.services .single-service .content{
+    position: relative;
+    z-index: 20;
+}
+
+.services .single-service .circle-before{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    transform: translate(40%,-40%);
+    width: 150px;
+    height: 150px;
+    background-color: var(--main-color);
+    border: 6px solid red;
+    border-radius: 50%;
+    opacity: .8;
+    z-index: 10;
+    transition: all .5s;
+}
+
+.services .single-service:hover .circle-before{
+    width: 100%;
+    height: 100%;
+    transform: none;
+    border: 0;
+    border-radius: 0;
+    opacity: 1;
+}
+
+.services .single-service .icon{
+    display: inline-block;
+    margin-bottom: 26px;
+    height: 70px;
+    width: 70px;
+    background-color: var(--main-color);
+    border-radius: 5px;
+    line-height: 70px;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    transition: all .7s;
+}
+
+.services .single-service:hover .icon{
+    background-color: var(--second-bg-color);
+    color: var(--main-color);
+}
+
+.services .single-service .title{
+    margin-bottom: 18px;
+    font-weight: 700;
+    font-size: 23px;
+    transition: var(--bg-color) .3s;
+}
+
+.services .single-service:hover .title{
+    color: black;
+}
+
+.services .single-service .description{
+    margin-top: 20px;
+    font-size: 14px;
+    transition: color .3s;
+}
+
+.services .single-service:hover .description{
+    color: black;
+}
+
+.services .single-service a{
+    position: relative;
+    font-size: 10px;
+    color: var(--main-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color .3s;
+}
+
+
+.services .single-service:hover a{
+    color: black;
+}
+
+@media (max-width:991px) {
+    section{
+        padding: 10rem 3% 2rem;
+    }
+    .services{
+        padding-bottom:7rem; 
+    }
+}
+
+@media (max-width:895px) {
+    .services .service-container{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
