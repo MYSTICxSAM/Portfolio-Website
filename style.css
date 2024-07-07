@@ -531,3 +531,19 @@ span{
     transform: scale(1.2);
     transition: 0.5s ease;
 }
+
+@media (max-width: 768px) {
+    .skills .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .skills .row {
+        width: 100%;
+    }
+    
+    .skills .info {
+        width: calc(50% - 1rem);
+        margin-bottom: 2rem;
+    }
+}
