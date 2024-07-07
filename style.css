@@ -483,6 +483,7 @@ span{
 .skills {
     background: var(--bg-color);
     padding: 4rem 2rem;
+    min-height: 95vh;
 }
 
 .skills .container {
