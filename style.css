@@ -66,6 +66,7 @@ html::-webkit-scrollbar-thumb{
 }
 
 .navbar a{
+    color: initial;
     font-size:1.8rem;
     color: var(--text-color);
     margin-left: 5rem;
@@ -79,6 +80,8 @@ html::-webkit-scrollbar-thumb{
     color: var(--main-color);
     border-bottom: 3px solid var(--main-color);
 }
+
+
 
 #menu-icon{
     font-size: 3.6rem;
@@ -105,18 +108,20 @@ html::-webkit-scrollbar-thumb{
 
     .navbar.active{
         display: block;
+        
+    }
+    .navbar a{
+        display: block;
         font-size: 2rem;
-        margin: 3rem 0;
+        margin: 6rem 0;
     }
     .navbar a:hover,
 .navbar a.active{
     padding: 1rem;
     border-radius: 0.5rem;
-    border-bottom: 0.5rem;
+    
     }
-    .home-img img{
-        border-radius: 2%
-    }
+    
 }
 
 
@@ -472,6 +477,7 @@ span{
 }
 
 @media (max-width:895px) {
+    
     .services .service-container{
         grid-template-columns: repeat(1,1fr);
     }
@@ -675,6 +681,9 @@ span{
 
 @media screen and (max-width:600px)
 {
+     .education{
+        min-height: 70vh;
+     }
     .education.timeline{
         margin-top: 2rem;
     }
