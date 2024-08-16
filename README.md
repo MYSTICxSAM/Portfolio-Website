@@ -10,5 +10,7 @@ Contact Form: A simple, functional contact form that allows visitors to reach ou
 
 ## Technologies Used
 HTML: For structuring the content of the website.
+
 CSS: For styling the website, including layout, colors, typography, and responsive design.
+
 JavaScript: For adding interactivity and enhancing the user experience.
