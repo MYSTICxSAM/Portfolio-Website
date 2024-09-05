@@ -1,4 +1,8 @@
 Click This to Check the End result: https://mysticxsam.github.io/Portfolio-Website/
+![Screenshot 2024-09-05 221426](https://github.com/user-attachments/assets/749bf60c-a7b6-43b0-ba78-9e273fb8c6f6)
+
+
+
 
 # Overview
 This portfolio website is a personal project designed to showcase my skills, projects, and experience as a web developer. The website is built using HTML for structure, CSS for styling, and JavaScript for interactivity.
