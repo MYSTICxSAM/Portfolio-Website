@@ -8,80 +8,96 @@ export default function CustomCursor() {
   const cursorDotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Only run cursor logic if it's not a touch device
+    // 1. Device Check
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     if (isTouchDevice) return;
 
     const cursor = cursorRef.current;
     const cursorDot = cursorDotRef.current;
-
     if (!cursor || !cursorDot) return;
 
-    let mouseX = 0;
-    let mouseY = 0;
+    // 2. High-Performance QuickSetters
+    // This is much faster than gsap.to() on every mouse move
+    const xSetCursor = gsap.quickSetter(cursor, "x", "px");
+    const ySetCursor = gsap.quickSetter(cursor, "y", "px");
+    const xSetDot = gsap.quickSetter(cursorDot, "x", "px");
+    const ySetDot = gsap.quickSetter(cursorDot, "y", "px");
+
+    // Hide cursor initially to prevent "jumping" from (0,0)
+    gsap.set([cursor, cursorDot], { opacity: 0 });
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+      const { clientX, clientY } = e;
 
-      gsap.to(cursorDot, {
-        left: mouseX,
-        top: mouseY,
-        duration: 0,
-      });
+      // Show cursors on first move
+      gsap.to([cursor, cursorDot], { opacity: 1, duration: 0.2 });
 
-      // Added smooth follow for the outer ring
+      // Immediate move for dot
+      xSetDot(clientX);
+      ySetDot(clientY);
+
+      // Smooth lag move for outer ring
       gsap.to(cursor, {
-        left: mouseX,
-        top: mouseY,
+        x: clientX,
+        y: clientY,
         duration: 0.15,
+        ease: "power2.out",
+        overwrite: "auto",
       });
     };
 
-    const handleMouseEnter = (e: Event) => {
+    // 3. Hover Interactions
+    const handleMouseEnter = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (
-        target.closest("a, button, .interactive, .skill-tag, .proj-card, .electric-btn")
-      ) {
+      const isInteractive = target.closest("a, button, .interactive, .skill-tag, .proj-card, .electric-btn");
+
+      if (isInteractive) {
         gsap.to(cursor, {
           scale: 1.8,
+          backgroundColor: "rgba(68, 136, 255, 0.1)",
           borderColor: "#4488ff",
           duration: 0.3,
         });
         gsap.to(cursorDot, {
           scale: 0,
-          duration: 0.3,
+          duration: 0.2,
         });
       }
     };
 
-    const handleMouseLeave = () => {
-      gsap.to(cursor, {
-        scale: 1,
-        borderColor: "rgba(255, 255, 255, 0.5)",
-        duration: 0.3,
-      });
-      gsap.to(cursorDot, {
-        scale: 1,
-        duration: 0.3,
-      });
+    const handleMouseLeave = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const isInteractive = target.closest("a, button, .interactive, .skill-tag, .proj-card, .electric-btn");
+
+      if (isInteractive) {
+        gsap.to(cursor, {
+          scale: 1,
+          backgroundColor: "transparent",
+          borderColor: "rgba(255, 255, 255, 0.5)",
+          duration: 0.3,
+        });
+        gsap.to(cursorDot, {
+          scale: 1,
+          duration: 0.2,
+        });
+      }
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseover", handleMouseEnter, true);
-    document.addEventListener("mouseout", handleMouseLeave, true);
+    document.addEventListener("mouseover", handleMouseEnter);
+    document.addEventListener("mouseout", handleMouseLeave);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseover", handleMouseEnter, true);
-      document.removeEventListener("mouseout", handleMouseLeave, true);
+      document.removeEventListener("mouseover", handleMouseEnter);
+      document.removeEventListener("mouseout", handleMouseLeave);
     };
   }, []);
 
   return (
     <>
       <style jsx global>{`
-        /* Only hide cursor on PC (devices that support hover) */
+        /* Hide real cursor only on devices that support hover */
         @media (hover: hover) and (pointer: fine) {
           * {
             cursor: none !important;
@@ -89,22 +105,23 @@ export default function CustomCursor() {
         }
       `}</style>
 
-      {/* Hidden by default, only visible on PC via tailwind 'hidden md:block' */}
+      {/* Outer Ring */}
       <div
         ref={cursorRef}
-        className="pointer-events-none fixed z-[9999] w-8 h-8 border-2 border-white/50 rounded-full mix-blend-screen hidden md:block"
+        className="pointer-events-none fixed top-0 left-0 z-[9999] w-10 h-10 border border-white/50 rounded-full mix-blend-difference hidden md:block"
         style={{
-          left: "-16px",
-          top: "-16px",
+          marginTop: "-20px", // Centers the ring (half of width)
+          marginLeft: "-20px",
         }}
       />
 
+      {/* Inner Dot */}
       <div
         ref={cursorDotRef}
-        className="pointer-events-none fixed z-[9999] w-2 h-2 bg-white rounded-full mix-blend-screen hidden md:block"
+        className="pointer-events-none fixed top-0 left-0 z-[9999] w-1.5 h-1.5 bg-white rounded-full mix-blend-difference hidden md:block"
         style={{
-          left: "-4px",
-          top: "-4px",
+          marginTop: "-3px", // Centers the dot (half of width)
+          marginLeft: "-3px",
         }}
       />
     </>
