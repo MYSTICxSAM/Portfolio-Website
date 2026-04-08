@@ -87,8 +87,11 @@ export default function HeroSection() {
       <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
         
         {/* BIG BACKGROUND NAME */}
-        <div ref={bgNameRef} className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <span className="font-display text-[25vw] md:text-[20vw] font-black text-white/[0.02] whitespace-nowrap">
+        <div ref={bgNameRef} className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+          <span
+            className="font-display font-black text-white/[0.09] leading-[0.85] whitespace-nowrap"
+            style={{ fontSize: 'clamp(3rem, 10vw, 16rem)' }}
+          >
             SAMARTH
           </span>
         </div>
@@ -101,10 +104,10 @@ export default function HeroSection() {
           <h1 ref={taglineRef} className="text-[12vw] md:text-[5vw] font-black leading-[0.95] md:leading-[0.9] tracking-tighter mb-8 md:mb-10 max-w-[15ch]">
             Engineering Digital <br className="hidden md:block" /> Resilience.
           </h1>
-          <div className="flex flex-col items-center gap-4">
+          {/* <div className="flex flex-col items-center gap-4">
             <div className="w-px h-8 md:h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
             <p className="text-[9px] md:text-[10px] font-mono uppercase tracking-[0.3em] text-white/30">Scroll</p>
-          </div>
+          </div> */}
         </div>
 
         {/* --- PHASE 2 CONTENT: EXPERTISE --- */}
